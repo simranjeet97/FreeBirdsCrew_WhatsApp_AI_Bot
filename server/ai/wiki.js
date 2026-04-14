@@ -14,6 +14,8 @@ const INTENT_PAGES = {
   medium_blogs:     ['medium_blogs.md', 'about_simranjeet.md'],
   topmate_booking:  ['topmate_booking.md'],
   concepts:         ['concepts_knowledge.md', 'github_projects.md', 'youtube_content.md'],
+  research_papers:  ['research_papers.md', 'youtube_content.md'],
+  interview:        ['interview_questions.md', 'youtube_content.md'],
   mentorship:       ['topmate_booking.md', 'about_simranjeet.md'],
   general:          ['about_simranjeet.md', 'github_projects.md'],
 };

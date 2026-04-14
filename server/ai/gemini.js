@@ -11,7 +11,10 @@ function getModel() {
       throw new Error('GEMINI_API_KEY is not set in environment variables');
     }
     genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    model = genAI.getGenerativeModel({ 
+      model: MODEL_NAME,
+      tools: [{ googleSearch: {} }]
+    });
   }
   return model;
 }
@@ -32,7 +35,9 @@ Classify the following WhatsApp message into exactly ONE of these intents:
 - youtube_content → asking about YouTube videos, tutorials, playlists, watching
 - medium_blogs    → asking about Medium blogs, articles, writing
 - topmate_booking → wanting to connect, talk, book a call, schedule, hire
-- concepts        → asking about GenAI/LLM/RAG/Agentic AI concepts, how things work
+- concepts        → asking about GenAI/LLMs/RAG/Agentic AI, Data Science, ML concepts, how things work
+- research_papers → asking about AI/ML research papers, summaries, technical details
+- interview       → asking about interview questions, interview prep for AI/ML/Data Science roles
 - mentorship      → asking for career guidance, mentorship, job advice, learning roadmap
 - general         → greetings, help requests, anything else
 
@@ -45,7 +50,7 @@ Respond with ONLY the intent label, nothing else. Example: github_projects`;
     const text = result.response.text().trim().toLowerCase();
 
     const validIntents = ['about', 'github_projects', 'youtube_content', 'medium_blogs',
-      'topmate_booking', 'concepts', 'mentorship', 'general'];
+      'topmate_booking', 'concepts', 'research_papers', 'interview', 'mentorship', 'general'];
 
     // Find the matching intent (handle if model returned extra text)
     const matched = validIntents.find(intent => text.includes(intent));
@@ -62,21 +67,23 @@ Respond with ONLY the intent label, nothing else. Example: github_projects`;
 async function generateResponse(userMessage, wikiContext, schema) {
   const m = getModel();
 
-  const systemPrompt = `You are Simranjeet Singh's personal AI assistant on WhatsApp.
+const systemPrompt = `You are Simranjeet Singh's personal AI assistant on WhatsApp.
 ${schema}
 
-KNOWLEDGE BASE (use only this to answer — do not make up links or projects):
+KNOWLEDGE BASE (reference this first, but use Web Search if confidence is low):
 ${wikiContext}
 
-WHATSAPP FORMATTING RULES:
+WHATSAPP FORMATTING RULES & CORE INSTRUCTIONS:
 - Use emojis naturally (🚀 📚 🤖 🎯 💡 ✅ 📺 👨‍💻 🔥)
 - Keep responses concise and scannable — WhatsApp is not a web page
 - Use line breaks generously
 - Use bullets with • or - for lists
 - Never use markdown headers (# ## ###) — they don't render in WhatsApp
+- 🧠 **Strategic & Structured**: Every answer related to any topics must be very strategic, logically planned, and well-structured step-by-step.
+- 🌐 **Web Search**: If your confidence in an answer based on the Knowledge Base is very low, use Google Web Search (Search tool) to retrieve the required information.
+- 🔗 **Always Include Links**: EVERY single answer MUST include Simranjeet's relevant info (either LinkedIn, GitHub, YouTube, or Medium) whichever is most suitable for the user's query or answer. Use the links from the Knowledge Base or general known ones (e.g. https://www.youtube.com/@SimranjeetSingh).
 - Always include direct clickable links when recommending a resource
 - End with a helpful next step or call-to-action
-- Maximum 500 words. Prefer shorter, punchy responses.
 - Be warm, knowledgeable, and helpful — like a smart friend answering on behalf of Simranjeet`;
 
   const fullPrompt = `${systemPrompt}

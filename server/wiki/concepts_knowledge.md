@@ -127,3 +127,19 @@ Making ML model predictions understandable to humans. Critical for regulated ind
 
 **Learn more:**
 - YouTube: https://www.youtube.com/playlist?list=PLYIE4hvbWhsCQld2zZlsrPbjShUeHrl41
+
+---
+
+## 📊 Data Science & Classical ML
+
+**What is Data Science?**
+The field of extracting insights from data using statistics, algorithms, and domain knowledge.
+
+**Key Concepts:**
+- **Supervised Learning**: Linear Regression, Logistic Regression, Random Forest, SVM, Gradient Boosting (XGBoost)
+- **Unsupervised Learning**: K-Means Clustering, PCA, t-SNE
+- **Model Evaluation**: Precision, Recall, F1-Score, ROC-AUC, RMSE, MAE
+- **Data Preprocessing**: Feature scaling, imputation, encoding, handling imbalanced data
+
+**Learn more:**
+- Complete ML Course: https://github.com/simranjeet97/Complete_Machine_Learning_Course
