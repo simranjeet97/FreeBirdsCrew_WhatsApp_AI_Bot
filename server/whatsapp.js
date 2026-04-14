@@ -68,12 +68,25 @@ class WhatsAppBot {
       this.io.emit('status', { status: this.status, qr: this.qr });
     });
 
-    this.client.on('ready', () => {
+    this.client.on('ready', async () => {
       console.log('Client is ready!');
       this.status = 'READY';
       this.qr = null;
       this.io.emit('status', { status: this.status, llmEnabled: this.llmEnabled });
       this.io.emit('stats', db.getStats());
+
+      // Fetch and print all group IDs to help user configure ALLOWED_GROUPS
+      try {
+        const chats = await this.client.getChats();
+        const groups = chats.filter(chat => chat.isGroup);
+        console.log('\n=== YOUR WHATSAPP GROUPS (USE THESE IDs IN .env) ===');
+        groups.forEach(group => {
+          console.log(`- Name: "${group.name}"  ->  ID: ${group.id._serialized}`);
+        });
+        console.log('====================================================\n');
+      } catch (err) {
+        console.error('Failed to fetch groups:', err);
+      }
     });
 
     this.client.on('authenticated', () => {
@@ -108,6 +121,11 @@ class WhatsAppBot {
     });
 
     this.client.on('message', async (msg) => {
+      // Ignore WhatsApp Status/Stories
+      if (msg.from === 'status@broadcast' || msg.isStatus) {
+        return; // silently ignore
+      }
+
       console.log(`📩 Message from ${msg.from}: "${msg.body}"`);
       
       // Whitelist check

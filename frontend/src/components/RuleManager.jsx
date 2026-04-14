@@ -114,7 +114,7 @@ const RuleManager = ({ rules }) => {
                     <span className="badge" style={{ background: rule.enabled ? 'var(--primary)' : 'rgba(255,255,255,0.1)', color: 'white', padding: '0.2rem 0.6rem', fontSize: '0.7rem' }}>
                       ON MATCH
                     </span>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 600 }}>"{rule.trigger}"</span>
+                    <span style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 600, wordBreak: 'break-word' }}>"{rule.trigger}"</span>
                   </div>
                   
                   <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
@@ -134,7 +134,7 @@ const RuleManager = ({ rules }) => {
                     </button>
                   </div>
                 </div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', whiteSpace: 'pre-wrap', margin: 0, padding: '0.75rem', background: 'rgba(0,0,0,0.2)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, padding: '0.75rem', background: 'rgba(0,0,0,0.2)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.03)' }}>
                   {rule.response}
                 </p>
               </motion.div>
