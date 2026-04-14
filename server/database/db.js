@@ -28,7 +28,7 @@ db.exec(`
     sender TEXT NOT NULL,
     question TEXT NOT NULL,
     response TEXT NOT NULL,
-    model TEXT DEFAULT 'gemini-2.0-flash'
+    model TEXT DEFAULT 'gemini-3-flash-preview'
   );
 `);
 

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -5,7 +6,6 @@ const cors = require('cors');
 const WhatsAppBot = require('./whatsapp');
 const db = require('./database/db');
 const wiki = require('./ai/wiki');
-require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -117,7 +117,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     llmEnabled: !!process.env.GEMINI_API_KEY,
-    model: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
+    model: process.env.GEMINI_MODEL || 'gemini-3-flash-preview',
     wikiPages: wiki.listWikiPages().length,
     timestamp: new Date().toISOString()
   });

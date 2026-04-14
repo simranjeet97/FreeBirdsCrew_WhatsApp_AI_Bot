@@ -1,6 +1,6 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-const MODEL_NAME = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const MODEL_NAME = process.env.GEMINI_MODEL || 'gemini-3-flash-preview';
 
 let genAI = null;
 let model = null;
@@ -43,10 +43,10 @@ Respond with ONLY the intent label, nothing else. Example: github_projects`;
   try {
     const result = await m.generateContent(prompt);
     const text = result.response.text().trim().toLowerCase();
-    
-    const validIntents = ['about', 'github_projects', 'youtube_content', 'medium_blogs', 
-                          'topmate_booking', 'concepts', 'mentorship', 'general'];
-    
+
+    const validIntents = ['about', 'github_projects', 'youtube_content', 'medium_blogs',
+      'topmate_booking', 'concepts', 'mentorship', 'general'];
+
     // Find the matching intent (handle if model returned extra text)
     const matched = validIntents.find(intent => text.includes(intent));
     return matched || 'general';

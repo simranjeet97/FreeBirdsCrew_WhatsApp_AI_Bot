@@ -10,6 +10,7 @@ class WhatsAppBot {
     this.status = 'DISCONNECTED';
     this.qr = null;
     this.llmEnabled = isAvailable();
+    this.allowedGroups = (process.env.ALLOWED_GROUPS || '').split(',').map(id => id.trim()).filter(id => id.length > 0);
 
     if (this.llmEnabled) {
       console.log('✅ [Bot] LLM (Gemini) is ENABLED — AI-powered responses active');
@@ -107,7 +108,13 @@ class WhatsAppBot {
     });
 
     this.client.on('message', async (msg) => {
-      console.log('Message received:', msg.body);
+      console.log(`📩 Message from ${msg.from}: "${msg.body}"`);
+      
+      // Whitelist check
+      if (this.allowedGroups.length > 0 && !this.allowedGroups.includes(msg.from)) {
+        console.log(`⏭️  Skipping message from ${msg.from} (not in ALLOWED_GROUPS)`);
+        return;
+      }
       
       // Log inbound message
       db.addLog(msg.from, msg.body, 'inbound', 'manual');
