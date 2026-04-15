@@ -1,6 +1,6 @@
 # WhatsApp AI Bot 🤖 (with LLM Wiki Brain)
 
-A smart, AI-powered WhatsApp assistant built for **Simranjeet Singh** to automatically answer incoming messages using **Gemini 2.0 Flash**. 
+A smart, AI-powered WhatsApp assistant built for **Simranjeet Singh** to automatically answer incoming messages using **Gemini 3.0 Flash**. 
 
 Unlike standard bots that rely on fragile keyword-matching, or simple RAG setups that answer blindly from raw documents, this bot uses Karpathy's **[LLM Wiki Architecture](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)**. It reads from a curated, internal "knowledge wiki" to synthesize personalized, highly accurate responses with embedded direct links.
 
