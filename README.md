@@ -25,7 +25,7 @@ Unlike standard bots that rely on fragile keyword-matching, or simple RAG setups
 
 The bot's entire knowledge base lives locally inside `server/wiki/`. This means you can update the bot's knowledge simply by editing markdown files—no database or vector embeddings required!
 
-[![ProjectArchitecture Screenshot](ProjectArchitecture.png)](https://github.com/simranjeet97/FreeBirdsCrew_WhatsApp_AI_Bot/blob/master/ProjecArchitecture.png)
+[![ProjectArchitecture Screenshot](ProjectArchitecture.png)](https://github.com/simranjeet97/FreeBirdsCrew_WhatsApp_AI_Bot/blob/master/ProjectArchitecture.png)
 
 | Markdown File | Purpose |
 | ------------- | ------- |
